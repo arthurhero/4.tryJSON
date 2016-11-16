@@ -7,17 +7,48 @@
 //
 
 #import "ViewController.h"
+#import "Person.h"
 
 @interface ViewController ()
 
 @end
 
-@implementation ViewController
+
+@implementation ViewController{
+    NSArray <Person *> *people;
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    Person * alex = [Person new];
+    alex.name = @"Alex";
+    alex.title = @"Mitchell";
+    
+    [super viewDidLoad];
+    Person * titus = [Person new];
+    titus.name = @"Titus";
+    titus.title = @"Klinge";
+    
+    people = @[alex,titus];
     // Do any additional setup after loading the view, typically from a nib.
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return people.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *nextCell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    
+    Person *peep = people[indexPath.row];
+    
+    nextCell.textLabel.text = peep.name;
+    nextCell.detailTextLabel.text = peep.title;
+    
+    return nextCell;
+}
+
 
 
 - (void)didReceiveMemoryWarning {
